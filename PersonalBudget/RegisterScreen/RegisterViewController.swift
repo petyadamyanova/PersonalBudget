@@ -119,6 +119,11 @@ class RegisterViewController: UIViewController {
             showErrorForField(field: nameField, message: "You have to enter your name here")
         }
         
+        if !isValidEmail(email) {
+            showErrorForField(field: emailField, message: "Invalid email format")
+            return
+        }
+        
         if password != password2 {
             showErrorForField(field: secondPasswordField, message: "The passwords don't match!")
             return
@@ -148,6 +153,12 @@ class RegisterViewController: UIViewController {
         field.textField.layer.borderColor = UIColor.red.cgColor
         field.textField.layer.borderWidth = 0.5
         field.errorField.text = message
+    }
+    
+    func isValidEmail(_ email: String) -> Bool {
+        let emailRegex = "^[a-zA-Z0-9._%]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"
+        let emailPredicate = NSPredicate(format: "SELF MATCHES %@", emailRegex)
+        return emailPredicate.evaluate(with: email)
     }
 
     private func encodeAndStoreUserData(_ users: [User]) {
