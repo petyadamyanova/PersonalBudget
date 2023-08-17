@@ -95,7 +95,6 @@ class RegisterViewController: UIViewController {
         stackView.addArrangedSubview(nameField)
         stackView.addArrangedSubview(emailField)
         stackView.addArrangedSubview(usernameField)
-        //stackView.addArrangedSubview(errorUsernameField)
         stackView.addArrangedSubview(passwordField)
         stackView.addArrangedSubview(secondPasswordField)
         stackView.addArrangedSubview(registerButton)
@@ -119,32 +118,41 @@ class RegisterViewController: UIViewController {
                   return
               }
         
+        if name.isEmpty {
+            nameField.errorField.text = "You have to enter your name here"
+            nameField.errorField.isHidden = false
+            nameField.textField.layer.borderColor = UIColor.red.cgColor
+            nameField.textField.layer.borderWidth = 0.5
+        }
+        
         if password != password2 {
-            showErrorAlert(message: "The passwords don't match!")
+            secondPasswordField.errorField.text = "The passwords don't match!"
+            secondPasswordField.errorField.isHidden = false
+            secondPasswordField.textField.layer.borderColor = UIColor.red.cgColor
+            secondPasswordField.textField.layer.borderWidth = 0.5
             return
         }
         
         if username.count < 3 {
-            //showErrorAlert(message: "The username has to be at least 3 symbols!")
             usernameField.errorField.text = "The username has to be at least 3 symbols!"
+            usernameField.errorField.isHidden = false
             usernameField.textField.layer.borderColor = UIColor.red.cgColor
-            usernameField.layer.borderWidth = 0.2
+            usernameField.textField.layer.borderWidth = 0.5
             
             return
         }
         
         let user = User(name: name, email: email, username: username, password: password, accounts: [])
+        
         UsersManager.shared.addUser(user)
         UsersManager.shared.setCurrentUser(user)
         
         let encoder = JSONEncoder()
         do {
-            let encodedObject = try encoder.encode(user)
+            let encodedObject = try encoder.encode([user])
         }catch {
             print("error")
         }
-        
-        
         
         let mainViewController = MainViewController()
         let navController = UINavigationController(rootViewController: mainViewController)

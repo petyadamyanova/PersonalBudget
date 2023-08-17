@@ -56,6 +56,7 @@ class RoundedValidatedTextInput: UIStackView {
         stackView.addArrangedSubview(label)
         stackView.addArrangedSubview(textField)
         stackView.addArrangedSubview(errorField)
+        errorField.isHidden = true
         
         addArrangedSubview(stackView)
     }
