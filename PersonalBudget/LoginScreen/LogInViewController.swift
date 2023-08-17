@@ -106,9 +106,19 @@ final class LogInViewController: UIViewController {
         }
             
         do {
+            if let jsonString = String(data: data, encoding: .utf8) {
+                print("Loaded JSON: \(jsonString)")
+            }
+            
             let users = try JSONDecoder().decode([User].self, from: data)
             
-            if users.first(where: { $0.username == username && $0.password == password }) != nil {
+            if let user = users.first(where: { $0.username == username && $0.password == password }) {
+                
+                UsersManager.shared.addUser(user)
+                UsersManager.shared.setCurrentUser(user)
+                
+                //encodeAndStoreUserData([user])
+                
                 let mainViewController = MainViewController()
                 let navController = UINavigationController(rootViewController: mainViewController)
                 navController.modalPresentationStyle = .fullScreen
@@ -147,7 +157,16 @@ final class LogInViewController: UIViewController {
         field.textField.layer.borderWidth = 0.5
         field.errorField.text = message
     }
-
+    
+    private func encodeAndStoreUserData(_ users: [User]) {
+        let encoder = JSONEncoder()
+        do {
+            let encodedUsers = try encoder.encode(users)
+            UserDefaults.standard.set(encodedUsers, forKey: "userData")
+        } catch {
+            print("Error encoding and storing user data: \(error)")
+        }
+    }
 }
 
 protocol LogInViewControllerDelegate: AnyObject {

@@ -7,7 +7,13 @@
 
 import UIKit
 
+protocol AccountViewControllerDelegate: AnyObject {
+    func didAddAccount(_ account: Account)
+}
+
 class AccountViewController: UIViewController {
+    weak var delegate: AccountViewControllerDelegate?
+    
     private var stackView: UIStackView = {
        let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -90,6 +96,9 @@ class AccountViewController: UIViewController {
         currentUser.accounts.append(newAccount)
         UsersManager.shared.updateCurrentUser(currentUser)
         
+        saveUserData(currentUser)
+        
+        delegate?.didAddAccount(newAccount)
         navigationController?.popViewController(animated: true)
     }
     
@@ -110,5 +119,14 @@ class AccountViewController: UIViewController {
         ])
     }
     
+    func saveUserData(_ user: User) {
+        do {
+            let encoder = JSONEncoder()
+            let encodedUser = try encoder.encode(user)
+            UserDefaults.standard.set(encodedUser, forKey: "userData")
+        } catch {
+            print("Error encoding user data: \(error)")
+        }
+    }
 
 }
