@@ -29,18 +29,11 @@ class RegisterViewController: UIViewController {
         let txtField = RoundedValidatedTextInput()
         txtField.label.text = "UserName"
         txtField.textField.placeholder = "Enter username"
-        //txtField.addConstraints()
+        txtField.errorField.text = "Error"
     
         return txtField
     }()
     
-    public var errorUsernameField: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 15)
-        label.setContentHuggingPriority(.defaultHigh, for: .vertical)
-        label.text = "Error"
-        return label
-    }()
    
     
     private var emailField: RoundedValidatedTextInput = {
@@ -102,7 +95,7 @@ class RegisterViewController: UIViewController {
         stackView.addArrangedSubview(nameField)
         stackView.addArrangedSubview(emailField)
         stackView.addArrangedSubview(usernameField)
-        stackView.addArrangedSubview(errorUsernameField)
+        //stackView.addArrangedSubview(errorUsernameField)
         stackView.addArrangedSubview(passwordField)
         stackView.addArrangedSubview(secondPasswordField)
         stackView.addArrangedSubview(registerButton)
@@ -132,13 +125,26 @@ class RegisterViewController: UIViewController {
         }
         
         if username.count < 3 {
-            showErrorAlert(message: "The username has to be at least 3 symbols!")
+            //showErrorAlert(message: "The username has to be at least 3 symbols!")
+            usernameField.errorField.text = "The username has to be at least 3 symbols!"
+            usernameField.textField.layer.borderColor = UIColor.red.cgColor
+            usernameField.layer.borderWidth = 0.2
+            
             return
         }
         
         let user = User(name: name, email: email, username: username, password: password, accounts: [])
         UsersManager.shared.addUser(user)
         UsersManager.shared.setCurrentUser(user)
+        
+        let encoder = JSONEncoder()
+        do {
+            let encodedObject = try encoder.encode(user)
+        }catch {
+            print("error")
+        }
+        
+        
         
         let mainViewController = MainViewController()
         let navController = UINavigationController(rootViewController: mainViewController)
