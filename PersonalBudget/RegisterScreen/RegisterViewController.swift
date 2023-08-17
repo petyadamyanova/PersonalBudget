@@ -34,8 +34,6 @@ class RegisterViewController: UIViewController {
         return txtField
     }()
     
-   
-    
     private var emailField: RoundedValidatedTextInput = {
         let txtField = RoundedValidatedTextInput()
         txtField.label.text = "Email"
@@ -72,7 +70,6 @@ class RegisterViewController: UIViewController {
         
         return button
     }()
-    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -119,26 +116,16 @@ class RegisterViewController: UIViewController {
               }
         
         if name.isEmpty {
-            nameField.errorField.text = "You have to enter your name here"
-            nameField.errorField.isHidden = false
-            nameField.textField.layer.borderColor = UIColor.red.cgColor
-            nameField.textField.layer.borderWidth = 0.5
+            showErrorForField(field: nameField, message: "You have to enter your name here")
         }
         
         if password != password2 {
-            secondPasswordField.errorField.text = "The passwords don't match!"
-            secondPasswordField.errorField.isHidden = false
-            secondPasswordField.textField.layer.borderColor = UIColor.red.cgColor
-            secondPasswordField.textField.layer.borderWidth = 0.5
+            showErrorForField(field: secondPasswordField, message: "The passwords don't match!")
             return
         }
         
         if username.count < 3 {
-            usernameField.errorField.text = "The username has to be at least 3 symbols!"
-            usernameField.errorField.isHidden = false
-            usernameField.textField.layer.borderColor = UIColor.red.cgColor
-            usernameField.textField.layer.borderWidth = 0.5
-            
+            showErrorForField(field: usernameField, message: "The username has to be at least 3 symbols!")
             return
         }
         
@@ -147,17 +134,30 @@ class RegisterViewController: UIViewController {
         UsersManager.shared.addUser(user)
         UsersManager.shared.setCurrentUser(user)
         
-        let encoder = JSONEncoder()
-        do {
-            let encodedObject = try encoder.encode([user])
-        }catch {
-            print("error")
-        }
+        encodeAndStoreUserData([user])
+        
         
         let mainViewController = MainViewController()
         let navController = UINavigationController(rootViewController: mainViewController)
         navController.modalPresentationStyle = .fullScreen
         navigationController?.present(navController, animated: true)
+    }
+    
+    private func showErrorForField(field: RoundedValidatedTextInput, message: String) {
+        field.errorField.isHidden = false
+        field.textField.layer.borderColor = UIColor.red.cgColor
+        field.textField.layer.borderWidth = 0.5
+        field.errorField.text = message
+    }
+
+    private func encodeAndStoreUserData(_ users: [User]) {
+        let encoder = JSONEncoder()
+        do {
+            let encodedUsers = try encoder.encode(users)
+            UserDefaults.standard.set(encodedUsers, forKey: "userData")
+        } catch {
+            print("Error encoding and storing user data: \(error)")
+        }
     }
 }
 

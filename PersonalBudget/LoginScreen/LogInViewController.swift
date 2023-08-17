@@ -96,29 +96,31 @@ final class LogInViewController: UIViewController {
     
     private func didtapSubmitButton(_ action: UIAction) {
         
-        guard let username = usernameField.textField.text else {
+        guard let username = usernameField.textField.text,
+              let password = passwordField.textField.text else {
             return
         }
         
-        /*if username.isEmpty && ((passwordField.textField.text?.isEmpty) == nil){
-            usernameField.layer.borderColor = UIColor.red.cgColor
-            passwordField.layer.borderColor = UIColor.red.cgColor
-            errorLabel.text = "Please fill all the field!s"
-        }else if username.isEmpty && ((passwordField.textField.text?.isEmpty) != nil){
-            usernameField.layer.borderColor = UIColor.red.cgColor
-            errorLabel.text = "Please fill username field!"
-        }else if !username.isEmpty && ((passwordField.textField.text?.isEmpty) == nil){
-            passwordField.layer.borderColor = UIColor.red.cgColor
-            errorLabel.text = "Please fill password field!"
-        }*/
-        
-        if UsersManager.shared.userExists(username: username) {
+        guard let data = UserDefaults.standard.data(forKey: "userData") else {
+            return
+        }
             
-            let mainViewController = MainViewController()
-            let navController = UINavigationController(rootViewController: mainViewController)
-            navController.modalPresentationStyle = .fullScreen
-            navigationController?.present(navController, animated: true)
-            delegate?.didLogin(username)
+        do {
+            let users = try JSONDecoder().decode([User].self, from: data)
+            
+            if users.first(where: { $0.username == username && $0.password == password }) != nil {
+                let mainViewController = MainViewController()
+                let navController = UINavigationController(rootViewController: mainViewController)
+                navController.modalPresentationStyle = .fullScreen
+                navigationController?.present(navController, animated: true)
+                delegate?.didLogin(username)
+            } else if users.first(where: { $0.username != username }) != nil {
+                showErrorForField(field: usernameField, message: "Username not found!")
+            }else if users.first(where: { $0.password != password }) != nil {
+                showErrorForField(field: passwordField, message: "Password is incorect!")
+            }
+        } catch {
+            print("Error decoding JSON: \(error)")
         }
     }
     
@@ -137,6 +139,13 @@ final class LogInViewController: UIViewController {
             stackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
             stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16)
         ])
+    }
+    
+    private func showErrorForField(field: RoundedValidatedTextInput, message: String) {
+        field.errorField.isHidden = false
+        field.textField.layer.borderColor = UIColor.red.cgColor
+        field.textField.layer.borderWidth = 0.5
+        field.errorField.text = message
     }
 
 }
