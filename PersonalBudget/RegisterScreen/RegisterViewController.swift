@@ -29,9 +29,19 @@ class RegisterViewController: UIViewController {
         let txtField = RoundedValidatedTextInput()
         txtField.label.text = "UserName"
         txtField.textField.placeholder = "Enter username"
+        //txtField.addConstraints()
     
         return txtField
     }()
+    
+    public var errorUsernameField: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 15)
+        label.setContentHuggingPriority(.defaultHigh, for: .vertical)
+        label.text = "Error"
+        return label
+    }()
+   
     
     private var emailField: RoundedValidatedTextInput = {
         let txtField = RoundedValidatedTextInput()
@@ -92,6 +102,7 @@ class RegisterViewController: UIViewController {
         stackView.addArrangedSubview(nameField)
         stackView.addArrangedSubview(emailField)
         stackView.addArrangedSubview(usernameField)
+        stackView.addArrangedSubview(errorUsernameField)
         stackView.addArrangedSubview(passwordField)
         stackView.addArrangedSubview(secondPasswordField)
         stackView.addArrangedSubview(registerButton)

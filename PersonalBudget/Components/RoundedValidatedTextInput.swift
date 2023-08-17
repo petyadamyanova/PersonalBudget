@@ -14,7 +14,7 @@ class RoundedValidatedTextInput: UIStackView {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
-        stackView.spacing = 12
+        stackView.spacing = 2
         return stackView
     }()
     
