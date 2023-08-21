@@ -78,7 +78,6 @@ class RegisterViewController: UIViewController {
         setupSubmitButton()
         addSubviews()
         addStackViewConstraints()
-        
     }
     
     private func setupSubmitButton() {

@@ -39,6 +39,7 @@ class RoundedValidatedTextInput: UIStackView {
         textField.layer.cornerRadius = 6
         textField.layer.borderWidth = 2
         textField.setContentHuggingPriority(.defaultLow, for: .vertical)
+        textField.addConstraint(textField.heightAnchor.constraint(equalToConstant: 35))
         return textField
     }()
     

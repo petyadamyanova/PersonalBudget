@@ -17,7 +17,6 @@ class AuthenticationViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        //dump(Array(UserDefaults.standard.dictionaryRepresentation().keys))
         view.backgroundColor = .white
         setupLoginButton()
         setupWelcomeLabel()
@@ -48,6 +47,6 @@ class AuthenticationViewController: UIViewController {
 
 extension AuthenticationViewController: LogInViewControllerDelegate {
     func didLogin(_ user: String) {
-        welcomeLabel.text = "Wellcome, \(user)!"
+        welcomeLabel.text = "Wellcome!"
    }
 }
