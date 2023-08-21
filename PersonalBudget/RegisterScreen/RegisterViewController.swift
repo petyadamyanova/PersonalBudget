@@ -111,27 +111,34 @@ class RegisterViewController: UIViewController {
               let username = usernameField.textField.text,
               let password = passwordField.textField.text,
               let password2 = secondPasswordField.textField.text else {
-                  showErrorAlert(message: "All fields have to be filled!")
                   return
               }
         
         if name.isEmpty {
             showErrorForField(field: nameField, message: "You have to enter your name here")
+        } else {
+            removeErrorForField(field: nameField)
         }
         
         if !isValidEmail(email) {
             showErrorForField(field: emailField, message: "Invalid email format")
             return
-        }
-        
-        if password != password2 {
-            showErrorForField(field: secondPasswordField, message: "The passwords don't match!")
-            return
+        } else {
+            removeErrorForField(field: emailField)
         }
         
         if username.count < 3 {
             showErrorForField(field: usernameField, message: "The username has to be at least 3 symbols!")
             return
+        } else {
+            removeErrorForField(field: usernameField)
+        }
+        
+        if password != password2 {
+            showErrorForField(field: secondPasswordField, message: "The passwords don't match!")
+            return
+        } else {
+            removeErrorForField(field: secondPasswordField)
         }
         
         let user = User(name: name, email: email, username: username, password: password, accounts: [])
@@ -155,6 +162,13 @@ class RegisterViewController: UIViewController {
         field.errorField.text = message
     }
     
+    private func removeErrorForField(field: RoundedValidatedTextInput) {
+        field.errorField.isHidden = true
+        field.textField.layer.borderColor = UIColor.black.cgColor
+        field.textField.layer.cornerRadius = 6
+        field.textField.layer.borderWidth = 2
+    }
+    
     func isValidEmail(_ email: String) -> Bool {
         let emailRegex = "^[a-zA-Z0-9._%]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"
         let emailPredicate = NSPredicate(format: "SELF MATCHES %@", emailRegex)
@@ -169,14 +183,5 @@ class RegisterViewController: UIViewController {
         } catch {
             print("Error encoding and storing user data: \(error)")
         }
-    }
-}
-
-extension UIViewController {
-    func showErrorAlert(message: String) {
-        let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-        alert.addAction(okAction)
-        present(alert, animated: true, completion: nil)
     }
 }
