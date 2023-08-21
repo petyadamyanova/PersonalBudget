@@ -113,7 +113,7 @@ extension MainViewController: UITableViewDataSource {
         
         var content = cell.defaultContentConfiguration()
         content.text = account?.accountName
-        content.secondaryText = "Balance: \(account?.openingBalance ?? 0)"
+        //content.secondaryText = "Balance: \(account?.openingBalance ?? 0)"
         cell.contentConfiguration = content
         
         return cell
