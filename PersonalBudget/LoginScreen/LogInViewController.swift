@@ -112,7 +112,13 @@ final class LogInViewController: UIViewController {
             
             let users = try JSONDecoder().decode([User].self, from: data)
             
-            if let user = users.first(where: { $0.username == username && $0.password == password }) {
+            if users.first(where: { $0.username != username }) != nil {
+                showErrorForField(field: usernameField, message: "Username not found!")
+            }else{
+                removeErrorForField(field: usernameField)
+            }
+            
+            if let user = users.first(where: { $0.password == password }) {
                 
                 UsersManager.shared.addUser(user)
                 UsersManager.shared.setCurrentUser(user)
@@ -124,11 +130,10 @@ final class LogInViewController: UIViewController {
                 navController.modalPresentationStyle = .fullScreen
                 navigationController?.present(navController, animated: true)
                 delegate?.didLogin(username)
-            } else if users.first(where: { $0.username != username }) != nil {
-                showErrorForField(field: usernameField, message: "Username not found!")
-            }else if users.first(where: { $0.password != password }) != nil {
+            } else if users.first(where: { $0.password != password }) != nil {
                 showErrorForField(field: passwordField, message: "Password is incorect!")
             }
+            
         } catch {
             print("Error decoding JSON: \(error)")
         }
@@ -156,6 +161,13 @@ final class LogInViewController: UIViewController {
         field.textField.layer.borderColor = UIColor.red.cgColor
         field.textField.layer.borderWidth = 0.5
         field.errorField.text = message
+    }
+    
+    private func removeErrorForField(field: RoundedValidatedTextInput) {
+        field.errorField.isHidden = true
+        field.textField.layer.borderColor = UIColor.black.cgColor
+        field.textField.layer.cornerRadius = 6
+        field.textField.layer.borderWidth = 2
     }
     
     private func encodeAndStoreUserData(_ users: [User]) {

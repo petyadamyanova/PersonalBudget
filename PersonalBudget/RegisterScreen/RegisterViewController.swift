@@ -133,6 +133,13 @@ class RegisterViewController: UIViewController {
             removeErrorForField(field: usernameField)
         }
         
+        if password.count < 8 {
+            showErrorForField(field: secondPasswordField, message: "The passwords have to be 8 symbols")
+            return
+        } else {
+            removeErrorForField(field: secondPasswordField)
+        }
+        
         if password != password2 {
             showErrorForField(field: secondPasswordField, message: "The passwords don't match!")
             return
