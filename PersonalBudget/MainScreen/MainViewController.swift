@@ -23,10 +23,6 @@ final class MainViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         configureTableView()
-        /*guard let user = UsersManager.shared.getCurrentUser() else {
-            return
-        }
-        currentUser = user*/
         
         if let user = UsersManager.shared.getCurrentUser() {
             currentUser = user
@@ -113,7 +109,7 @@ extension MainViewController: UITableViewDataSource {
         
         var content = cell.defaultContentConfiguration()
         content.text = account?.accountName
-        //content.secondaryText = "Balance: \(account?.openingBalance ?? 0)"
+        content.secondaryText = "Balance: \(account?.openingBalance ?? 0)"
         cell.contentConfiguration = content
         
         return cell

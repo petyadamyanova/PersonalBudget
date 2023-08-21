@@ -17,6 +17,7 @@ class AuthenticationViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        //dump(Array(UserDefaults.standard.dictionaryRepresentation().keys))
         view.backgroundColor = .white
         setupLoginButton()
         setupWelcomeLabel()

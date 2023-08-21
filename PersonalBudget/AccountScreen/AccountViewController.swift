@@ -86,17 +86,20 @@ class AccountViewController: UIViewController {
         
         guard let accountName = accountNameField.textField.text,
               let accountType = accountTypeField.textField.text,
-              let _ = balanceField.textField.text,
-              let openingBalance = Int(balanceField.textField.text!) else {
+              let balance = balanceField.textField.text,
+              let openingBalance = Int(balance) else {
+            showErrorForField(field: balanceField, message: "You have to enter number here!")
             return
         }
+        
+        
         
         let newAccount = Account(accountName: accountName, accountType: accountType, openingBalance: openingBalance)
         
         currentUser.accounts.append(newAccount)
         UsersManager.shared.updateCurrentUser(currentUser)
         
-        saveUserData(currentUser)
+        saveUserData([currentUser])
         
         delegate?.didAddAccount(newAccount)
         navigationController?.popViewController(animated: true)
@@ -119,14 +122,32 @@ class AccountViewController: UIViewController {
         ])
     }
     
-    func saveUserData(_ user: User) {
+    /*func saveUserData(_ user: User) {
         do {
             let encoder = JSONEncoder()
             let encodedUser = try encoder.encode(user)
             UserDefaults.standard.set(encodedUser, forKey: "userData")
         } catch {
             print("Error encoding user data: \(error)")
+            
         }
+    }*/
+    
+    private func saveUserData(_ users: [User]) {
+        let encoder = JSONEncoder()
+        do {
+            let encodedUsers = try encoder.encode(users)
+            UserDefaults.standard.set(encodedUsers, forKey: "userData")
+        } catch {
+            print("Error encoding and storing user data: \(error)")
+        }
+    }
+    
+    private func showErrorForField(field: RoundedValidatedTextInput, message: String) {
+        field.errorField.isHidden = false
+        field.textField.layer.borderColor = UIColor.red.cgColor
+        field.textField.layer.borderWidth = 0.5
+        field.errorField.text = message
     }
 
 }
