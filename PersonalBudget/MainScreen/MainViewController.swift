@@ -32,14 +32,13 @@ final class MainViewController: UIViewController {
                 tableView.reloadData()
             }
         }
-
     }
-    
     
       private func configureTableView() {
           let tableView = UITableView(frame: view.bounds, style: .insetGrouped)
                   
           tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
+          //tableView.register(CustomCell.self, forCellReuseIdentifier: CustomCell.indentifier)
           tableView.dataSource = self
           tableView.delegate = self
           view.addSubview(tableView)
@@ -125,6 +124,17 @@ extension MainViewController: UITableViewDelegate {
         label.font = UIFont.boldSystemFont(ofSize: 32.0)
         label.text = "\(userName)'s bank accounts: "
         return label
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let selectedAccount = currentUser?.accounts[indexPath.row] else {
+            return
+        }
+        
+        let accountDetailViewController = AccountExpenseViewController(account: selectedAccount)
+        navigationController?.pushViewController(accountDetailViewController, animated: true)
+        
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }
 
