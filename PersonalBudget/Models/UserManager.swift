@@ -10,6 +10,7 @@ import Foundation
 final class UsersManager {
     static var shared = UsersManager()
     private var currentUser: User?
+    private var currentAccount: Account?
     var users: [User] = []
     
     private init() {
@@ -23,6 +24,14 @@ final class UsersManager {
     func setCurrentUser(_ user: User) {
         currentUser = user
         saveCurrentUser()
+    }
+    
+    func setCurrentAccount(_ account: Account){
+        currentAccount = account
+    }
+    
+    func getCurrentAccount() -> Account? {
+        return currentAccount
     }
     
     func getCurrentUser() -> User? {

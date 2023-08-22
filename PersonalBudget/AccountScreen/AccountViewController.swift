@@ -102,8 +102,8 @@ class AccountViewController: UIViewController {
         }
         
         
-        let newAccount = Account(accountName: accountName, accountType: accountType, openingBalance: openingBalance)
-        
+        let newAccount = Account(accountName: accountName, accountType: accountType, openingBalance: openingBalance, expenses: [])
+
         currentUser.accounts.append(newAccount)
         UsersManager.shared.updateCurrentUser(currentUser)
         
