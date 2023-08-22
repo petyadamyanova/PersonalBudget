@@ -100,42 +100,31 @@ final class LogInViewController: UIViewController {
               let password = passwordField.textField.text else {
             return
         }
-        
-        guard let data = UserDefaults.standard.data(forKey: "userData") else {
+            
+        guard let users = UserFileManager.loadUsersData() else {
             return
         }
+        
+        if users.first(where: { $0.username != username }) != nil {
+            showErrorForField(field: usernameField, message: "Username not found!")
+        }else{
+            removeErrorForField(field: usernameField)
+        }
+        
+        if let user = users.first(where: { $0.password == password }) {
             
-        do {
-            if let jsonString = String(data: data, encoding: .utf8) {
-                print("Loaded JSON: \(jsonString)")
-            }
+            UsersManager.shared.addUser(user)
+            UsersManager.shared.setCurrentUser(user)
             
-            let users = try JSONDecoder().decode([User].self, from: data)
+            //encodeAndStoreUserData([user])
             
-            if users.first(where: { $0.username != username }) != nil {
-                showErrorForField(field: usernameField, message: "Username not found!")
-            }else{
-                removeErrorForField(field: usernameField)
-            }
-            
-            if let user = users.first(where: { $0.password == password }) {
-                
-                UsersManager.shared.addUser(user)
-                UsersManager.shared.setCurrentUser(user)
-                
-                //encodeAndStoreUserData([user])
-                
-                let mainViewController = MainViewController()
-                let navController = UINavigationController(rootViewController: mainViewController)
-                navController.modalPresentationStyle = .fullScreen
-                navigationController?.present(navController, animated: true)
-                delegate?.didLogin(username)
-            } else if users.first(where: { $0.password != password }) != nil {
-                showErrorForField(field: passwordField, message: "Password is incorect!")
-            }
-            
-        } catch {
-            print("Error decoding JSON: \(error)")
+            let mainViewController = MainViewController()
+            let navController = UINavigationController(rootViewController: mainViewController)
+            navController.modalPresentationStyle = .fullScreen
+            navigationController?.present(navController, animated: true)
+            delegate?.didLogin(username)
+        } else if users.first(where: { $0.password != password }) != nil {
+            showErrorForField(field: passwordField, message: "Password is incorect!")
         }
     }
     

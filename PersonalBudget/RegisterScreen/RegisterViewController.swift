@@ -152,7 +152,8 @@ class RegisterViewController: UIViewController {
         UsersManager.shared.addUser(user)
         UsersManager.shared.setCurrentUser(user)
         
-        encodeAndStoreUserData([user])
+        //encodeAndStoreUserData([user])
+        UserFileManager.saveUsersData([user])
         
         
         let mainViewController = MainViewController()

@@ -24,7 +24,7 @@ class AccountViewController: UIViewController {
     
     private var accountNameField: RoundedValidatedTextInput = {
         let txtField = RoundedValidatedTextInput()
-        txtField.label.text = "Account name"
+        txtField.label.text = "Account name*"
         txtField.textField.placeholder = "Enter account name"
     
         return txtField
@@ -40,7 +40,7 @@ class AccountViewController: UIViewController {
     
     private var balanceField: RoundedValidatedTextInput = {
         let txtField = RoundedValidatedTextInput()
-        txtField.label.text = "Balance"
+        txtField.label.text = "Balance*"
         txtField.textField.placeholder = "Enter balance"
     
         return txtField
@@ -92,6 +92,14 @@ class AccountViewController: UIViewController {
             return
         }
         
+        removeErrorForField(field: balanceField)
+        
+        if accountName.isEmpty {
+            showErrorForField(field: accountNameField, message: "You have to enter account name")
+            return
+        } else {
+            removeErrorForField(field: accountNameField)
+        }
         
         
         let newAccount = Account(accountName: accountName, accountType: accountType, openingBalance: openingBalance)
@@ -99,7 +107,8 @@ class AccountViewController: UIViewController {
         currentUser.accounts.append(newAccount)
         UsersManager.shared.updateCurrentUser(currentUser)
         
-        saveUserData([currentUser])
+        //saveUserData([currentUser])
+        UserFileManager.saveUsersData([currentUser])
         
         delegate?.didAddAccount(newAccount)
         navigationController?.popViewController(animated: true)
@@ -122,17 +131,6 @@ class AccountViewController: UIViewController {
         ])
     }
     
-    /*func saveUserData(_ user: User) {
-        do {
-            let encoder = JSONEncoder()
-            let encodedUser = try encoder.encode(user)
-            UserDefaults.standard.set(encodedUser, forKey: "userData")
-        } catch {
-            print("Error encoding user data: \(error)")
-            
-        }
-    }*/
-    
     private func saveUserData(_ users: [User]) {
         let encoder = JSONEncoder()
         do {
@@ -148,6 +146,13 @@ class AccountViewController: UIViewController {
         field.textField.layer.borderColor = UIColor.red.cgColor
         field.textField.layer.borderWidth = 0.5
         field.errorField.text = message
+    }
+    
+    private func removeErrorForField(field: RoundedValidatedTextInput) {
+        field.errorField.isHidden = true
+        field.textField.layer.borderColor = UIColor.black.cgColor
+        field.textField.layer.cornerRadius = 6
+        field.textField.layer.borderWidth = 2
     }
 
 }

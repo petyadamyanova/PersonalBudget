@@ -20,3 +20,10 @@ struct Account: Codable {
     var accountType: String
     var openingBalance: Int
 }
+
+struct Expense: Codable {
+    var date: Date
+    var name: String
+    var amount: Double
+    var category: String
+}
