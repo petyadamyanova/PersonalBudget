@@ -103,12 +103,21 @@ class AccountViewController: UIViewController {
         
         
         let newAccount = Account(accountName: accountName, accountType: accountType, openingBalance: openingBalance, expenses: [])
+        
+        if var existingUsers = UserFileManager.loadUsersData() {
+            // Find and update the current user
+            if let userIndex = existingUsers.firstIndex(where: { $0.username == currentUser.username }) {
+                currentUser.accounts = existingUsers[userIndex].accounts
+                currentUser.accounts.append(newAccount)
+                existingUsers[userIndex] = currentUser
+            }
+            // Save the updated user data
+            UserFileManager.saveUsersData(existingUsers)
+        }
 
-        currentUser.accounts.append(newAccount)
         UsersManager.shared.updateCurrentUser(currentUser)
         
-        //saveUserData([currentUser])
-        UserFileManager.saveUsersData([currentUser])
+        //UserFileManager.saveUsersData([currentUser])
         
         delegate?.didAddAccount(newAccount)
         navigationController?.popViewController(animated: true)

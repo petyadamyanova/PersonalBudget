@@ -105,18 +105,16 @@ final class LogInViewController: UIViewController {
             return
         }
         
-        if users.first(where: { $0.username != username }) != nil {
+        if users.first(where: { $0.username != username }) == nil {
             showErrorForField(field: usernameField, message: "Username not found!")
         }else{
             removeErrorForField(field: usernameField)
         }
         
-        if let user = users.first(where: { $0.password == password }) {
+        if let user = users.first(where: { $0.username == username && $0.password == password }) {
             
             UsersManager.shared.addUser(user)
             UsersManager.shared.setCurrentUser(user)
-            
-            //encodeAndStoreUserData([user])
             
             let mainViewController = MainViewController()
             let navController = UINavigationController(rootViewController: mainViewController)

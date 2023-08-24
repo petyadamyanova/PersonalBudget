@@ -149,11 +149,19 @@ class RegisterViewController: UIViewController {
         
         let user = User(name: name, email: email, username: username, password: password, accounts: [])
         
+        if var existingUsers = UserFileManager.loadUsersData() {
+            existingUsers.append(user)
+            UserFileManager.saveUsersData(existingUsers)
+        } else {
+            UserFileManager.saveUsersData([user])
+        }
+            
+        
         UsersManager.shared.addUser(user)
         UsersManager.shared.setCurrentUser(user)
         
         //encodeAndStoreUserData([user])
-        UserFileManager.saveUsersData([user])
+        //UserFileManager.saveUsersData([user])
         
         
         let mainViewController = MainViewController()

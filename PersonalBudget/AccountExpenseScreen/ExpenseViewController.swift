@@ -108,9 +108,15 @@ class ExpenseViewController: UIViewController {
 
         currentAccount.expenses.append(newExpense)
         
-        if let accountIndex = currentUser.accounts.firstIndex(where: { $0.accountName == currentAccount.accountName }) {
-            currentUser.accounts[accountIndex] = currentAccount
-            UserFileManager.saveUsersData([currentUser])
+        if var users = UserFileManager.loadUsersData() {
+            if let userIndex = users.firstIndex(where: { $0.username == currentUser.username }) {
+                currentUser.accounts = users[userIndex].accounts
+                if let accountIndex = currentUser.accounts.firstIndex(where: { $0.accountName == currentAccount.accountName }) {
+                    currentUser.accounts[accountIndex] = currentAccount
+                    users[userIndex] = currentUser
+                    UserFileManager.saveUsersData(users)
+                }
+            }
         }
         
         delegate?.didAddExpense(newExpense)
