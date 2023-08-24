@@ -11,8 +11,9 @@ protocol AccountViewControllerDelegate: AnyObject {
     func didAddAccount(_ account: Account)
 }
 
-class AccountViewController: UIViewController {
+class AccountViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
     weak var delegate: AccountViewControllerDelegate?
+    private let accountTypes = ["Cash", "Card", "Savings", "Other"]
     
     private var stackView: UIStackView = {
        let stackView = UIStackView()
@@ -36,6 +37,11 @@ class AccountViewController: UIViewController {
         txtField.textField.placeholder = "Enter account type"
     
         return txtField
+    }()
+    
+    private var accountTypePicker: UIPickerView = {
+        let picker = UIPickerView()
+        return picker
     }()
     
     private var balanceField: RoundedValidatedTextInput = {
@@ -63,6 +69,11 @@ class AccountViewController: UIViewController {
         setupSubmitButton()
         addSubviews()
         addStackViewConstraints()
+        
+        accountTypePicker.dataSource = self
+        accountTypePicker.delegate = self
+        accountTypeField.textField.inputView = accountTypePicker
+               
     }
     
     private func setupDismissButton() {
@@ -162,6 +173,22 @@ class AccountViewController: UIViewController {
         field.textField.layer.borderColor = UIColor.black.cgColor
         field.textField.layer.cornerRadius = 6
         field.textField.layer.borderWidth = 2
+    }
+    
+    @objc(numberOfComponentsInPickerView:) func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    @objc func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return accountTypes.count
+    }
+    
+    @objc func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return accountTypes[row]
+    }
+    
+    @objc func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        accountTypeField.textField.text = accountTypes[row]
     }
 
 }

@@ -37,4 +37,18 @@ class UserFileManager {
         }
         return nil
     }
+    
+    static func deleteExpenseForCurrentUser(_ expense: Expense) {
+        if var existingUsers = loadUsersData(), let currentUser = UsersManager.shared.getCurrentUser() {
+            if let userIndex = existingUsers.firstIndex(where: { $0.username == currentUser.username }) {
+                for accountIndex in existingUsers[userIndex].accounts.indices {
+                    let expenses = existingUsers[userIndex].accounts[accountIndex].expenses
+                    if let expenseIndex = expenses.firstIndex(where: { $0.name == expense.name }) {
+                        existingUsers[userIndex].accounts[accountIndex].expenses.remove(at: expenseIndex)
+                    }
+                }
+                saveUsersData(existingUsers)
+            }
+        }
+    }
 }

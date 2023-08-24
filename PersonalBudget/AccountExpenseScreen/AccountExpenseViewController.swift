@@ -107,6 +107,26 @@ extension AccountExpenseViewController: UITableViewDelegate {
         label.text = "Expenses: "
         return label
     }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+    
+        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { [weak self] (_, _, completion) in
+            guard let self = self else { return }
+            
+            let expenseToDelete = self.currentAccount.expenses[indexPath.row]
+            self.currentAccount.expenses.remove(at: indexPath.row)
+            self.tableView.deleteRows(at: [indexPath], with: .automatic)
+            
+            UserFileManager.deleteExpenseForCurrentUser(expenseToDelete)
+            self.tableView.reloadData()
+            
+            completion(true)
+        }
+        
+        let configuration = UISwipeActionsConfiguration(actions: [deleteAction])
+        configuration.performsFirstActionWithFullSwipe = true
+        return configuration
+    }
 }
 
 extension AccountExpenseViewController: ExpenseViewControllerDelegate {
