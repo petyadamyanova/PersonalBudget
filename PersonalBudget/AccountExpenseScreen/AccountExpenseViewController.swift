@@ -30,6 +30,7 @@ class AccountExpenseViewController: UIViewController {
         setupAddExpenseButton()
         
         configureTableView()
+        //tableView.reloadData()
         
         if let account = UsersManager.shared.getCurrentAccount() {
             currentAccount = account
@@ -38,16 +39,7 @@ class AccountExpenseViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        //configureTableView()
-        
-        /*if let account = UsersManager.shared.getCurrentAccount() {
-            currentAccount = account
-            
-            if let expenses = currentAccount?.expenses, !expenses.isEmpty {
-                self.expenses = expenses
-                tableView.reloadData()
-            }
-        }*/
+        tableView.reloadData()
     }
     
     private func configureTableView() {

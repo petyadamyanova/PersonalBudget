@@ -92,6 +92,10 @@ class ExpenseViewController: UIViewController {
             return
         }
         
+        guard var currentUser = UsersManager.shared.getCurrentUser() else {
+            return
+        }
+        
         guard let expenseName = expenseNameField.textField.text,
               let expenseDate = expenseDateField.textField.text,
               let expenseAmount = expenseAmountField.textField.text,
@@ -104,7 +108,10 @@ class ExpenseViewController: UIViewController {
 
         currentAccount.expenses.append(newExpense)
         
-//        UserFileManager.saveUsersData([currentUser])
+        if let accountIndex = currentUser.accounts.firstIndex(where: { $0.accountName == currentAccount.accountName }) {
+            currentUser.accounts[accountIndex] = currentAccount
+            UserFileManager.saveUsersData([currentUser])
+        }
         
         delegate?.didAddExpense(newExpense)
         navigationController?.popViewController(animated: true)
