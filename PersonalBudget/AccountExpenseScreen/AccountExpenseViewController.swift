@@ -10,46 +10,59 @@ import UIKit
 class AccountExpenseViewController: UIViewController {
     var tableView: UITableView!
     let cellIdentifier = "Expense"
-    var expenses: [Expense] = []
-    var currentAccount: Account?
-    
+    var currentAccount: Account
 
+    init(currentAccount: Account) {
+        tableView = UITableView()
+        self.currentAccount = currentAccount
+        super.init(nibName: nil, bundle: nil)
+        
+        configureTableView()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         setupAddExpenseButton()
+        
+        configureTableView()
+        
+        if let account = UsersManager.shared.getCurrentAccount() {
+            currentAccount = account
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        configureTableView()
+        //configureTableView()
         
-        if let account = UsersManager.shared.getCurrentAccount() {
+        /*if let account = UsersManager.shared.getCurrentAccount() {
             currentAccount = account
             
             if let expenses = currentAccount?.expenses, !expenses.isEmpty {
                 self.expenses = expenses
                 tableView.reloadData()
             }
-        }
+        }*/
     }
     
     private func configureTableView() {
-        let tableView = UITableView(frame: view.bounds, style: .insetGrouped)
-                
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
         tableView.dataSource = self
         tableView.delegate = self
         view.addSubview(tableView)
                 
+        tableView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.topAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
-                
-        self.tableView = tableView
   }
     
     private func setupAddExpenseButton() {
@@ -70,19 +83,16 @@ extension AccountExpenseViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let expenses = UsersManager.shared.getCurrentAccount()?.expenses else {
-            return 0
-        }
-        return expenses.count
+        return currentAccount.expenses.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let expense = UsersManager.shared.getCurrentAccount()?.expenses?[indexPath.row]
+        let expense = currentAccount.expenses[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
         
         var content = cell.defaultContentConfiguration()
-        content.text = expense?.name
-        content.secondaryText = "Amount: \(expense?.amount ?? 0)"
+        content.text = expense.name
+        content.secondaryText = "Amount: \(expense.amount)"
         cell.contentConfiguration = content
         
         return cell
@@ -102,8 +112,7 @@ extension AccountExpenseViewController: UITableViewDelegate {
 
 extension AccountExpenseViewController: ExpenseViewControllerDelegate {
     func didAddExpense(_ expense: Expense) {
-        expenses.append(expense)
+        currentAccount.expenses.append(expense)
         self.tableView.reloadData()
-        //print(expenses.first?.name)
     }
 }

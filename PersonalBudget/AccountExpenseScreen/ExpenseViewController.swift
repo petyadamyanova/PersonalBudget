@@ -102,9 +102,9 @@ class ExpenseViewController: UIViewController {
         
         let newExpense = Expense(date: expenseDate, name: expenseName, amount: amount, category: expenseCategory)
 
-        currentAccount.expenses?.append(newExpense)
+        currentAccount.expenses.append(newExpense)
         
-        //UserFileManager.saveUsersData([currentUser])
+//        UserFileManager.saveUsersData([currentUser])
         
         delegate?.didAddExpense(newExpense)
         navigationController?.popViewController(animated: true)

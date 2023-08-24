@@ -19,7 +19,7 @@ struct Account: Codable {
     var accountName: String
     var accountType: String
     var openingBalance: Int
-    var expenses: [Expense]?
+    var expenses: [Expense]
 }
 
 struct Expense: Codable {

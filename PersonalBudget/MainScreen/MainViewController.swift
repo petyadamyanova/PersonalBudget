@@ -133,7 +133,7 @@ extension MainViewController: UITableViewDelegate {
         
         UsersManager.shared.setCurrentAccount(selectedAccount)
         
-        let accountDetailViewController = AccountExpenseViewController()
+        let accountDetailViewController = AccountExpenseViewController(currentAccount: selectedAccount)
         navigationController?.pushViewController(accountDetailViewController, animated: true)
         
         tableView.deselectRow(at: indexPath, animated: true)
