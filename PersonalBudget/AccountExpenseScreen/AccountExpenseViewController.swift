@@ -11,6 +11,7 @@ class AccountExpenseViewController: UIViewController {
     var tableView: UITableView!
     let cellIdentifier = "Expense"
     var currentAccount: Account
+    private var filteredExpenses: [Expense] = []
 
     init(currentAccount: Account) {
         tableView = UITableView()
@@ -30,7 +31,6 @@ class AccountExpenseViewController: UIViewController {
         setupAddExpenseButton()
         
         configureTableView()
-        //tableView.reloadData()
         
         if let account = UsersManager.shared.getCurrentAccount() {
             currentAccount = account
@@ -55,6 +55,11 @@ class AccountExpenseViewController: UIViewController {
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
+        
+        let searchController = UISearchController(searchResultsController: nil)
+        searchController.searchBar.delegate = self
+        navigationItem.searchController = searchController
+        navigationController?.navigationBar.isHidden = false
   }
     
     private func setupAddExpenseButton() {
@@ -76,10 +81,12 @@ extension AccountExpenseViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return currentAccount.expenses.count
+        //return filteredExpenses.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let expense = currentAccount.expenses[indexPath.row]
+        //let expense = filteredExpenses[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
         
         var content = cell.defaultContentConfiguration()
@@ -105,6 +112,28 @@ extension AccountExpenseViewController: UITableViewDelegate {
 extension AccountExpenseViewController: ExpenseViewControllerDelegate {
     func didAddExpense(_ expense: Expense) {
         currentAccount.expenses.append(expense)
+        self.tableView.reloadData()
+    }
+}
+
+extension AccountExpenseViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        filterExpensesByCategory(searchText)
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.text = ""
+        filterExpensesByCategory("")
+    }
+    
+    private func filterExpensesByCategory(_ searchText: String) {
+        if searchText.isEmpty {
+            filteredExpenses = currentAccount.expenses
+        } else {
+            filteredExpenses = currentAccount.expenses.filter {
+                $0.name.localizedCaseInsensitiveContains(searchText)
+            }
+        }
         self.tableView.reloadData()
     }
 }
