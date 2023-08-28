@@ -8,6 +8,7 @@
 import UIKit
 
 class RegisterViewController: UIViewController {
+    private let emailValidator = EmailValidator()
     
     private var stackView: UIStackView = {
        let stackView = UIStackView()
@@ -119,7 +120,7 @@ class RegisterViewController: UIViewController {
             removeErrorForField(field: nameField)
         }
         
-        if !isValidEmail(email) {
+        if !emailValidator.isValid(email) {
             showErrorForField(field: emailField, message: "Invalid email format")
             return
         } else {

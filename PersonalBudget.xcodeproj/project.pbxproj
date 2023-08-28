@@ -25,7 +25,20 @@
 		DB7B18A92A94C5C800AC5EBC /* CustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7B18A82A94C5C800AC5EBC /* CustomCell.swift */; };
 		DB7B18AE2A94CD4300AC5EBC /* AccountExpenseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7B18AD2A94CD4300AC5EBC /* AccountExpenseViewController.swift */; };
 		DB7B18B02A94D12700AC5EBC /* ExpenseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7B18AF2A94D12700AC5EBC /* ExpenseViewController.swift */; };
+		DB7B18C32A9C9C8000AC5EBC /* EmailValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7B18C22A9C9C8000AC5EBC /* EmailValidator.swift */; };
+		DB7B18C52A9C9D9E00AC5EBC /* EmailValidatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7B18C42A9C9D9E00AC5EBC /* EmailValidatorTests.swift */; };
+		DB7B18C72A9C9F7B00AC5EBC /* PasswordValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7B18C62A9C9F7B00AC5EBC /* PasswordValidator.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		DB7B18B92A9C95E800AC5EBC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3F187F8E2A8A08490064590B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3F187F952A8A08490064590B;
+			remoteInfo = PersonalBudget;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		3F187F962A8A08490064590B /* PersonalBudget.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PersonalBudget.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -48,10 +61,21 @@
 		DB7B18A82A94C5C800AC5EBC /* CustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCell.swift; sourceTree = "<group>"; };
 		DB7B18AD2A94CD4300AC5EBC /* AccountExpenseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountExpenseViewController.swift; sourceTree = "<group>"; };
 		DB7B18AF2A94D12700AC5EBC /* ExpenseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseViewController.swift; sourceTree = "<group>"; };
+		DB7B18B52A9C95E800AC5EBC /* PersonalBudgetTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PersonalBudgetTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		DB7B18C22A9C9C8000AC5EBC /* EmailValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailValidator.swift; sourceTree = "<group>"; };
+		DB7B18C42A9C9D9E00AC5EBC /* EmailValidatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailValidatorTests.swift; sourceTree = "<group>"; };
+		DB7B18C62A9C9F7B00AC5EBC /* PasswordValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordValidator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		3F187F932A8A08490064590B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DB7B18B22A9C95E800AC5EBC /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -65,6 +89,7 @@
 			isa = PBXGroup;
 			children = (
 				3F187F982A8A08490064590B /* PersonalBudget */,
+				DB7B18B62A9C95E800AC5EBC /* PersonalBudgetTests */,
 				3F187F972A8A08490064590B /* Products */,
 			);
 			sourceTree = "<group>";
@@ -73,6 +98,7 @@
 			isa = PBXGroup;
 			children = (
 				3F187F962A8A08490064590B /* PersonalBudget.app */,
+				DB7B18B52A9C95E800AC5EBC /* PersonalBudgetTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -80,6 +106,7 @@
 		3F187F982A8A08490064590B /* PersonalBudget */ = {
 			isa = PBXGroup;
 			children = (
+				DB7B18C12A9C9C6300AC5EBC /* Validators */,
 				DB7B18AC2A94CCF100AC5EBC /* AccountExpenseScreen */,
 				3F3AD8712A8A8B9600536426 /* RegisterScreen */,
 				3F3AD86D2A8A8A7700536426 /* Components */,
@@ -167,6 +194,23 @@
 			path = AccountExpenseScreen;
 			sourceTree = "<group>";
 		};
+		DB7B18B62A9C95E800AC5EBC /* PersonalBudgetTests */ = {
+			isa = PBXGroup;
+			children = (
+				DB7B18C42A9C9D9E00AC5EBC /* EmailValidatorTests.swift */,
+			);
+			path = PersonalBudgetTests;
+			sourceTree = "<group>";
+		};
+		DB7B18C12A9C9C6300AC5EBC /* Validators */ = {
+			isa = PBXGroup;
+			children = (
+				DB7B18C22A9C9C8000AC5EBC /* EmailValidator.swift */,
+				DB7B18C62A9C9F7B00AC5EBC /* PasswordValidator.swift */,
+			);
+			path = Validators;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -187,6 +231,24 @@
 			productReference = 3F187F962A8A08490064590B /* PersonalBudget.app */;
 			productType = "com.apple.product-type.application";
 		};
+		DB7B18B42A9C95E800AC5EBC /* PersonalBudgetTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DB7B18BB2A9C95E800AC5EBC /* Build configuration list for PBXNativeTarget "PersonalBudgetTests" */;
+			buildPhases = (
+				DB7B18B12A9C95E800AC5EBC /* Sources */,
+				DB7B18B22A9C95E800AC5EBC /* Frameworks */,
+				DB7B18B32A9C95E800AC5EBC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DB7B18BA2A9C95E800AC5EBC /* PBXTargetDependency */,
+			);
+			name = PersonalBudgetTests;
+			productName = PersonalBudgetTests;
+			productReference = DB7B18B52A9C95E800AC5EBC /* PersonalBudgetTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -199,6 +261,10 @@
 				TargetAttributes = {
 					3F187F952A8A08490064590B = {
 						CreatedOnToolsVersion = 14.3.1;
+					};
+					DB7B18B42A9C95E800AC5EBC = {
+						CreatedOnToolsVersion = 14.3.1;
+						TestTargetID = 3F187F952A8A08490064590B;
 					};
 				};
 			};
@@ -216,6 +282,7 @@
 			projectRoot = "";
 			targets = (
 				3F187F952A8A08490064590B /* PersonalBudget */,
+				DB7B18B42A9C95E800AC5EBC /* PersonalBudgetTests */,
 			);
 		};
 /* End PBXProject section */
@@ -227,6 +294,13 @@
 			files = (
 				3F187FA62A8A084B0064590B /* LaunchScreen.storyboard in Resources */,
 				3F187FA32A8A084B0064590B /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DB7B18B32A9C95E800AC5EBC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -243,6 +317,8 @@
 				3F3AD8662A8A82DE00536426 /* AccountViewController.swift in Sources */,
 				3F187F9A2A8A08490064590B /* AppDelegate.swift in Sources */,
 				3F3AD8772A8A9E8600536426 /* RegisterCoordinator.swift in Sources */,
+				DB7B18C32A9C9C8000AC5EBC /* EmailValidator.swift in Sources */,
+				DB7B18C72A9C9F7B00AC5EBC /* PasswordValidator.swift in Sources */,
 				3F3AD86C2A8A854000536426 /* LogInViewController.swift in Sources */,
 				DB7B18AE2A94CD4300AC5EBC /* AccountExpenseViewController.swift in Sources */,
 				3F3AD8752A8A8BE800536426 /* Coordinator.swift in Sources */,
@@ -256,7 +332,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		DB7B18B12A9C95E800AC5EBC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DB7B18C52A9C9D9E00AC5EBC /* EmailValidatorTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		DB7B18BA2A9C95E800AC5EBC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3F187F952A8A08490064590B /* PersonalBudget */;
+			targetProxy = DB7B18B92A9C95E800AC5EBC /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		3F187FA42A8A084B0064590B /* LaunchScreen.storyboard */ = {
@@ -436,6 +528,40 @@
 			};
 			name = Release;
 		};
+		DB7B18BC2A9C95E800AC5EBC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.PersonalBudgetTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PersonalBudget.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/PersonalBudget";
+			};
+			name = Debug;
+		};
+		DB7B18BD2A9C95E800AC5EBC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.PersonalBudgetTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PersonalBudget.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/PersonalBudget";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -453,6 +579,15 @@
 			buildConfigurations = (
 				3F187FAB2A8A084B0064590B /* Debug */,
 				3F187FAC2A8A084B0064590B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DB7B18BB2A9C95E800AC5EBC /* Build configuration list for PBXNativeTarget "PersonalBudgetTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DB7B18BC2A9C95E800AC5EBC /* Debug */,
+				DB7B18BD2A9C95E800AC5EBC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
