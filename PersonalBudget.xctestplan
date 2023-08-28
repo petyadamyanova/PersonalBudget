@@ -1,0 +1,29 @@
+{
+  "configurations" : [
+    {
+      "id" : "377EB36E-B7A7-4725-8043-AA407C0339A7",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:PersonalBudget.xcodeproj",
+      "identifier" : "3F187F952A8A08490064590B",
+      "name" : "PersonalBudget"
+    }
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:PersonalBudget.xcodeproj",
+        "identifier" : "DB7B18B42A9C95E800AC5EBC",
+        "name" : "PersonalBudgetTests"
+      }
+    }
+  ],
+  "version" : 1
+}

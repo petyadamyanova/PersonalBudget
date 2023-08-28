@@ -71,6 +71,7 @@
 		DB7B18C82A9CA0B000AC5EBC /* PasswordValidatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordValidatorTests.swift; sourceTree = "<group>"; };
 		DB7B18CA2A9CA43000AC5EBC /* UsernameValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsernameValidator.swift; sourceTree = "<group>"; };
 		DB7B18CC2A9CA46700AC5EBC /* UsernameValidatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsernameValidatorTests.swift; sourceTree = "<group>"; };
+		DB7B18CE2A9CAA9500AC5EBC /* PersonalBudget.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = file; path = PersonalBudget.xctestplan; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -206,6 +207,7 @@
 				DB7B18C42A9C9D9E00AC5EBC /* EmailValidatorTests.swift */,
 				DB7B18C82A9CA0B000AC5EBC /* PasswordValidatorTests.swift */,
 				DB7B18CC2A9CA46700AC5EBC /* UsernameValidatorTests.swift */,
+				DB7B18CE2A9CAA9500AC5EBC /* PersonalBudget.xctestplan */,
 			);
 			path = PersonalBudgetTests;
 			sourceTree = "<group>";
