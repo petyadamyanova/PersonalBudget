@@ -9,6 +9,7 @@ import UIKit
 
 class RegisterViewController: UIViewController {
     private let emailValidator = EmailValidator()
+    private let passwordValidator = PasswordValidator()
     
     private var stackView: UIStackView = {
        let stackView = UIStackView()
@@ -134,7 +135,7 @@ class RegisterViewController: UIViewController {
             removeErrorForField(field: usernameField)
         }
         
-        if password.count < 8 {
+        if !passwordValidator.isValid(password) {
             showErrorForField(field: secondPasswordField, message: "The passwords have to be 8 symbols")
             return
         } else {
@@ -183,12 +184,6 @@ class RegisterViewController: UIViewController {
         field.textField.layer.borderColor = UIColor.black.cgColor
         field.textField.layer.cornerRadius = 6
         field.textField.layer.borderWidth = 2
-    }
-    
-    func isValidEmail(_ email: String) -> Bool {
-        let emailRegex = "^[a-zA-Z0-9._%]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"
-        let emailPredicate = NSPredicate(format: "SELF MATCHES %@", emailRegex)
-        return emailPredicate.evaluate(with: email)
     }
 
     private func encodeAndStoreUserData(_ users: [User]) {
