@@ -13,7 +13,7 @@ class RegisterViewController: UIViewController {
     private let usernameValidator = UsernameValidator()
     private let nameValidator = NameValidator()
     
-    private var stackView: UIStackView = {
+    internal var stackView: UIStackView = {
        let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
@@ -21,7 +21,7 @@ class RegisterViewController: UIViewController {
         return stackView
     }()
     
-    private var nameField: RoundedValidatedTextInput = {
+    internal var nameField: RoundedValidatedTextInput = {
         let txtField = RoundedValidatedTextInput()
         txtField.label.text = "Name"
         txtField.textField.placeholder = "Enter name"
@@ -29,7 +29,7 @@ class RegisterViewController: UIViewController {
         return txtField
     }()
     
-    private var usernameField: RoundedValidatedTextInput = {
+    internal var usernameField: RoundedValidatedTextInput = {
         let txtField = RoundedValidatedTextInput()
         txtField.label.text = "UserName"
         txtField.textField.placeholder = "Enter username"
@@ -38,7 +38,7 @@ class RegisterViewController: UIViewController {
         return txtField
     }()
     
-    private var emailField: RoundedValidatedTextInput = {
+    internal var emailField: RoundedValidatedTextInput = {
         let txtField = RoundedValidatedTextInput()
         txtField.label.text = "Email"
         txtField.textField.placeholder = "Enter email"
@@ -46,7 +46,7 @@ class RegisterViewController: UIViewController {
         return txtField
     }()
     
-    private var passwordField: RoundedValidatedTextInput = {
+    internal var passwordField: RoundedValidatedTextInput = {
         let txtField = RoundedValidatedTextInput()
         txtField.label.text = "Password"
         txtField.textField.placeholder = "Enter password"
@@ -55,7 +55,7 @@ class RegisterViewController: UIViewController {
         return txtField
     }()
     
-    private var secondPasswordField: RoundedValidatedTextInput = {
+    internal var secondPasswordField: RoundedValidatedTextInput = {
         let txtField = RoundedValidatedTextInput()
         txtField.label.text = "Repeat the password"
         txtField.textField.placeholder = "Enter password"
@@ -64,7 +64,7 @@ class RegisterViewController: UIViewController {
         return txtField
     }()
     
-    private var registerButton = {
+    internal var registerButton = {
         let button = UIButton()
         button.setTitle("Register", for: .normal)
         
@@ -108,7 +108,7 @@ class RegisterViewController: UIViewController {
         ])
     }
     
-    private func didtapRegisterButton(_ action: UIAction) {
+    internal func didtapRegisterButton(_ action: UIAction) {
         guard let name = nameField.textField.text,
               let email = emailField.textField.text,
               let username = usernameField.textField.text,

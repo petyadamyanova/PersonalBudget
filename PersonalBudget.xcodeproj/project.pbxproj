@@ -34,6 +34,7 @@
 		DB7B18D62A9CBA6B00AC5EBC /* NameValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7B18D52A9CBA6B00AC5EBC /* NameValidator.swift */; };
 		DB7B18D82A9CBAD500AC5EBC /* NameValidatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7B18D72A9CBAD500AC5EBC /* NameValidatorTests.swift */; };
 		DB7B18DA2A9CBD6B00AC5EBC /* LogInViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7B18D92A9CBD6B00AC5EBC /* LogInViewControllerTests.swift */; };
+		DB7B18DC2A9CC13A00AC5EBC /* RegisterViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7B18DB2A9CC13A00AC5EBC /* RegisterViewControllerTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,6 +79,7 @@
 		DB7B18D52A9CBA6B00AC5EBC /* NameValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameValidator.swift; sourceTree = "<group>"; };
 		DB7B18D72A9CBAD500AC5EBC /* NameValidatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameValidatorTests.swift; sourceTree = "<group>"; };
 		DB7B18D92A9CBD6B00AC5EBC /* LogInViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewControllerTests.swift; sourceTree = "<group>"; };
+		DB7B18DB2A9CC13A00AC5EBC /* RegisterViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewControllerTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -216,6 +218,7 @@
 				DB7B18CE2A9CAA9500AC5EBC /* PersonalBudget.xctestplan */,
 				DB7B18D72A9CBAD500AC5EBC /* NameValidatorTests.swift */,
 				DB7B18D92A9CBD6B00AC5EBC /* LogInViewControllerTests.swift */,
+				DB7B18DB2A9CC13A00AC5EBC /* RegisterViewControllerTests.swift */,
 			);
 			path = PersonalBudgetTests;
 			sourceTree = "<group>";
@@ -361,6 +364,7 @@
 				DB7B18C52A9C9D9E00AC5EBC /* EmailValidatorTests.swift in Sources */,
 				DB7B18D82A9CBAD500AC5EBC /* NameValidatorTests.swift in Sources */,
 				DB7B18CD2A9CA46700AC5EBC /* UsernameValidatorTests.swift in Sources */,
+				DB7B18DC2A9CC13A00AC5EBC /* RegisterViewControllerTests.swift in Sources */,
 				DB7B18C92A9CA0B000AC5EBC /* PasswordValidatorTests.swift in Sources */,
 				DB7B18DA2A9CBD6B00AC5EBC /* LogInViewControllerTests.swift in Sources */,
 			);

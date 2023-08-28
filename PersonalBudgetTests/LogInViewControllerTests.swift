@@ -9,11 +9,20 @@ import XCTest
 @testable import PersonalBudget
 
 final class LogInViewControllerTests: XCTestCase {
+    var viewController: LogInViewController!
+    
+    override func setUpWithError() throws {
+        viewController = LogInViewController()
+        viewController.loadViewIfNeeded()
+    }
+
+    override func tearDownWithError() throws {
+        viewController = nil
+    }
 
     func testLoginWithValidCredentials() {
         // Set up the view controller with a mock delegate and user data
         let mockDelegate = MockLogInViewControllerDelegate()
-        var viewController = LogInViewController()
     
         viewController.delegate = mockDelegate
     
@@ -29,7 +38,7 @@ final class LogInViewControllerTests: XCTestCase {
         viewController.didtapSubmitButton(submitAction)
         
         XCTAssertTrue(mockDelegate.didLoginCalled)
-        }
+    }
 }
 
 class MockLogInViewControllerDelegate: LogInViewControllerDelegate {
