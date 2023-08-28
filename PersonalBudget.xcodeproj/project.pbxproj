@@ -19,8 +19,6 @@
 		3F3AD86C2A8A854000536426 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3AD86B2A8A854000536426 /* LogInViewController.swift */; };
 		3F3AD86F2A8A8AB300536426 /* RoundedValidatedTextInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3AD86E2A8A8AB300536426 /* RoundedValidatedTextInput.swift */; };
 		3F3AD8732A8A8BD600536426 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3AD8722A8A8BD600536426 /* RegisterViewController.swift */; };
-		3F3AD8752A8A8BE800536426 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3AD8742A8A8BE800536426 /* Coordinator.swift */; };
-		3F3AD8772A8A9E8600536426 /* RegisterCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3AD8762A8A9E8600536426 /* RegisterCoordinator.swift */; };
 		DB7B18A72A94BDAA00AC5EBC /* UserFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7B18A62A94BDAA00AC5EBC /* UserFileManager.swift */; };
 		DB7B18A92A94C5C800AC5EBC /* CustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7B18A82A94C5C800AC5EBC /* CustomCell.swift */; };
 		DB7B18AE2A94CD4300AC5EBC /* AccountExpenseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7B18AD2A94CD4300AC5EBC /* AccountExpenseViewController.swift */; };
@@ -31,6 +29,11 @@
 		DB7B18C92A9CA0B000AC5EBC /* PasswordValidatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7B18C82A9CA0B000AC5EBC /* PasswordValidatorTests.swift */; };
 		DB7B18CB2A9CA43000AC5EBC /* UsernameValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7B18CA2A9CA43000AC5EBC /* UsernameValidator.swift */; };
 		DB7B18CD2A9CA46700AC5EBC /* UsernameValidatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7B18CC2A9CA46700AC5EBC /* UsernameValidatorTests.swift */; };
+		DB7B18D22A9CAC4200AC5EBC /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7B18D12A9CAC4200AC5EBC /* Coordinator.swift */; };
+		DB7B18D42A9CAC6300AC5EBC /* RegisterCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7B18D32A9CAC6300AC5EBC /* RegisterCoordinator.swift */; };
+		DB7B18D62A9CBA6B00AC5EBC /* NameValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7B18D52A9CBA6B00AC5EBC /* NameValidator.swift */; };
+		DB7B18D82A9CBAD500AC5EBC /* NameValidatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7B18D72A9CBAD500AC5EBC /* NameValidatorTests.swift */; };
+		DB7B18DA2A9CBD6B00AC5EBC /* LogInViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7B18D92A9CBD6B00AC5EBC /* LogInViewControllerTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,8 +61,6 @@
 		3F3AD86B2A8A854000536426 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		3F3AD86E2A8A8AB300536426 /* RoundedValidatedTextInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedValidatedTextInput.swift; sourceTree = "<group>"; };
 		3F3AD8722A8A8BD600536426 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
-		3F3AD8742A8A8BE800536426 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
-		3F3AD8762A8A9E8600536426 /* RegisterCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterCoordinator.swift; sourceTree = "<group>"; };
 		DB7B18A62A94BDAA00AC5EBC /* UserFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserFileManager.swift; sourceTree = "<group>"; };
 		DB7B18A82A94C5C800AC5EBC /* CustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCell.swift; sourceTree = "<group>"; };
 		DB7B18AD2A94CD4300AC5EBC /* AccountExpenseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountExpenseViewController.swift; sourceTree = "<group>"; };
@@ -72,6 +73,11 @@
 		DB7B18CA2A9CA43000AC5EBC /* UsernameValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsernameValidator.swift; sourceTree = "<group>"; };
 		DB7B18CC2A9CA46700AC5EBC /* UsernameValidatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsernameValidatorTests.swift; sourceTree = "<group>"; };
 		DB7B18CE2A9CAA9500AC5EBC /* PersonalBudget.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = file; path = PersonalBudget.xctestplan; sourceTree = SOURCE_ROOT; };
+		DB7B18D12A9CAC4200AC5EBC /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		DB7B18D32A9CAC6300AC5EBC /* RegisterCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterCoordinator.swift; sourceTree = "<group>"; };
+		DB7B18D52A9CBA6B00AC5EBC /* NameValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameValidator.swift; sourceTree = "<group>"; };
+		DB7B18D72A9CBAD500AC5EBC /* NameValidatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameValidatorTests.swift; sourceTree = "<group>"; };
+		DB7B18D92A9CBD6B00AC5EBC /* LogInViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewControllerTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -186,8 +192,8 @@
 			isa = PBXGroup;
 			children = (
 				3F3AD8722A8A8BD600536426 /* RegisterViewController.swift */,
-				3F3AD8742A8A8BE800536426 /* Coordinator.swift */,
-				3F3AD8762A8A9E8600536426 /* RegisterCoordinator.swift */,
+				DB7B18D12A9CAC4200AC5EBC /* Coordinator.swift */,
+				DB7B18D32A9CAC6300AC5EBC /* RegisterCoordinator.swift */,
 			);
 			path = RegisterScreen;
 			sourceTree = "<group>";
@@ -208,6 +214,8 @@
 				DB7B18C82A9CA0B000AC5EBC /* PasswordValidatorTests.swift */,
 				DB7B18CC2A9CA46700AC5EBC /* UsernameValidatorTests.swift */,
 				DB7B18CE2A9CAA9500AC5EBC /* PersonalBudget.xctestplan */,
+				DB7B18D72A9CBAD500AC5EBC /* NameValidatorTests.swift */,
+				DB7B18D92A9CBD6B00AC5EBC /* LogInViewControllerTests.swift */,
 			);
 			path = PersonalBudgetTests;
 			sourceTree = "<group>";
@@ -218,6 +226,7 @@
 				DB7B18C22A9C9C8000AC5EBC /* EmailValidator.swift */,
 				DB7B18C62A9C9F7B00AC5EBC /* PasswordValidator.swift */,
 				DB7B18CA2A9CA43000AC5EBC /* UsernameValidator.swift */,
+				DB7B18D52A9CBA6B00AC5EBC /* NameValidator.swift */,
 			);
 			path = Validators;
 			sourceTree = "<group>";
@@ -327,16 +336,17 @@
 				3F187F9E2A8A08490064590B /* MainViewController.swift in Sources */,
 				3F3AD8662A8A82DE00536426 /* AccountViewController.swift in Sources */,
 				3F187F9A2A8A08490064590B /* AppDelegate.swift in Sources */,
-				3F3AD8772A8A9E8600536426 /* RegisterCoordinator.swift in Sources */,
 				DB7B18C32A9C9C8000AC5EBC /* EmailValidator.swift in Sources */,
 				DB7B18C72A9C9F7B00AC5EBC /* PasswordValidator.swift in Sources */,
 				3F3AD86C2A8A854000536426 /* LogInViewController.swift in Sources */,
+				DB7B18D22A9CAC4200AC5EBC /* Coordinator.swift in Sources */,
 				DB7B18AE2A94CD4300AC5EBC /* AccountExpenseViewController.swift in Sources */,
 				DB7B18CB2A9CA43000AC5EBC /* UsernameValidator.swift in Sources */,
-				3F3AD8752A8A8BE800536426 /* Coordinator.swift in Sources */,
 				DB7B18A72A94BDAA00AC5EBC /* UserFileManager.swift in Sources */,
 				3F3AD8692A8A83BD00536426 /* AuthenticationViewController.swift in Sources */,
+				DB7B18D62A9CBA6B00AC5EBC /* NameValidator.swift in Sources */,
 				DB7B18A92A94C5C800AC5EBC /* CustomCell.swift in Sources */,
+				DB7B18D42A9CAC6300AC5EBC /* RegisterCoordinator.swift in Sources */,
 				3F3AD86F2A8A8AB300536426 /* RoundedValidatedTextInput.swift in Sources */,
 				DB7B18B02A94D12700AC5EBC /* ExpenseViewController.swift in Sources */,
 				3F187F9C2A8A08490064590B /* SceneDelegate.swift in Sources */,
@@ -349,8 +359,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				DB7B18C52A9C9D9E00AC5EBC /* EmailValidatorTests.swift in Sources */,
+				DB7B18D82A9CBAD500AC5EBC /* NameValidatorTests.swift in Sources */,
 				DB7B18CD2A9CA46700AC5EBC /* UsernameValidatorTests.swift in Sources */,
 				DB7B18C92A9CA0B000AC5EBC /* PasswordValidatorTests.swift in Sources */,
+				DB7B18DA2A9CBD6B00AC5EBC /* LogInViewControllerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

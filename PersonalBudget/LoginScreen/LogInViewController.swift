@@ -18,7 +18,7 @@ final class LogInViewController: UIViewController {
         return stackView
     }()
     
-    private var usernameField: RoundedValidatedTextInput = {
+    internal var usernameField: RoundedValidatedTextInput = {
         let txtField = RoundedValidatedTextInput()
         txtField.label.text = "UserName"
         txtField.textField.placeholder = "Enter username"
@@ -26,7 +26,7 @@ final class LogInViewController: UIViewController {
         return txtField
     }()
     
-    private var passwordField: RoundedValidatedTextInput = {
+    internal var passwordField: RoundedValidatedTextInput = {
         let txtField = RoundedValidatedTextInput()
         txtField.label.text = "Password"
         txtField.textField.placeholder = "Enter password"
@@ -35,7 +35,7 @@ final class LogInViewController: UIViewController {
         return txtField
     }()
     
-    private var submitButton = {
+    internal var submitButton = {
         let button = UIButton()
         button.setTitle("Submit", for: .normal)
         
@@ -94,7 +94,7 @@ final class LogInViewController: UIViewController {
         dismiss(animated: true)
     }
     
-    private func didtapSubmitButton(_ action: UIAction) {
+    internal func didtapSubmitButton(_ action: UIAction) {
         
         guard let username = usernameField.textField.text,
               let password = passwordField.textField.text else {

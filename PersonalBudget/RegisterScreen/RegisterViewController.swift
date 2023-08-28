@@ -10,6 +10,8 @@ import UIKit
 class RegisterViewController: UIViewController {
     private let emailValidator = EmailValidator()
     private let passwordValidator = PasswordValidator()
+    private let usernameValidator = UsernameValidator()
+    private let nameValidator = NameValidator()
     
     private var stackView: UIStackView = {
        let stackView = UIStackView()
@@ -115,7 +117,7 @@ class RegisterViewController: UIViewController {
                   return
               }
         
-        if name.isEmpty {
+        if !nameValidator.isValid(name) {
             showErrorForField(field: nameField, message: "You have to enter your name here")
         } else {
             removeErrorForField(field: nameField)
@@ -128,7 +130,7 @@ class RegisterViewController: UIViewController {
             removeErrorForField(field: emailField)
         }
         
-        if username.count < 3 {
+        if !usernameValidator.isValid(username){
             showErrorForField(field: usernameField, message: "The username has to be at least 3 symbols!")
             return
         } else {
