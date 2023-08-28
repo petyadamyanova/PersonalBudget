@@ -29,6 +29,8 @@
 		DB7B18C52A9C9D9E00AC5EBC /* EmailValidatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7B18C42A9C9D9E00AC5EBC /* EmailValidatorTests.swift */; };
 		DB7B18C72A9C9F7B00AC5EBC /* PasswordValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7B18C62A9C9F7B00AC5EBC /* PasswordValidator.swift */; };
 		DB7B18C92A9CA0B000AC5EBC /* PasswordValidatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7B18C82A9CA0B000AC5EBC /* PasswordValidatorTests.swift */; };
+		DB7B18CB2A9CA43000AC5EBC /* UsernameValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7B18CA2A9CA43000AC5EBC /* UsernameValidator.swift */; };
+		DB7B18CD2A9CA46700AC5EBC /* UsernameValidatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7B18CC2A9CA46700AC5EBC /* UsernameValidatorTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +69,8 @@
 		DB7B18C42A9C9D9E00AC5EBC /* EmailValidatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailValidatorTests.swift; sourceTree = "<group>"; };
 		DB7B18C62A9C9F7B00AC5EBC /* PasswordValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordValidator.swift; sourceTree = "<group>"; };
 		DB7B18C82A9CA0B000AC5EBC /* PasswordValidatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordValidatorTests.swift; sourceTree = "<group>"; };
+		DB7B18CA2A9CA43000AC5EBC /* UsernameValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsernameValidator.swift; sourceTree = "<group>"; };
+		DB7B18CC2A9CA46700AC5EBC /* UsernameValidatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsernameValidatorTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -201,6 +205,7 @@
 			children = (
 				DB7B18C42A9C9D9E00AC5EBC /* EmailValidatorTests.swift */,
 				DB7B18C82A9CA0B000AC5EBC /* PasswordValidatorTests.swift */,
+				DB7B18CC2A9CA46700AC5EBC /* UsernameValidatorTests.swift */,
 			);
 			path = PersonalBudgetTests;
 			sourceTree = "<group>";
@@ -210,6 +215,7 @@
 			children = (
 				DB7B18C22A9C9C8000AC5EBC /* EmailValidator.swift */,
 				DB7B18C62A9C9F7B00AC5EBC /* PasswordValidator.swift */,
+				DB7B18CA2A9CA43000AC5EBC /* UsernameValidator.swift */,
 			);
 			path = Validators;
 			sourceTree = "<group>";
@@ -324,6 +330,7 @@
 				DB7B18C72A9C9F7B00AC5EBC /* PasswordValidator.swift in Sources */,
 				3F3AD86C2A8A854000536426 /* LogInViewController.swift in Sources */,
 				DB7B18AE2A94CD4300AC5EBC /* AccountExpenseViewController.swift in Sources */,
+				DB7B18CB2A9CA43000AC5EBC /* UsernameValidator.swift in Sources */,
 				3F3AD8752A8A8BE800536426 /* Coordinator.swift in Sources */,
 				DB7B18A72A94BDAA00AC5EBC /* UserFileManager.swift in Sources */,
 				3F3AD8692A8A83BD00536426 /* AuthenticationViewController.swift in Sources */,
@@ -340,6 +347,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DB7B18C52A9C9D9E00AC5EBC /* EmailValidatorTests.swift in Sources */,
+				DB7B18CD2A9CA46700AC5EBC /* UsernameValidatorTests.swift in Sources */,
 				DB7B18C92A9CA0B000AC5EBC /* PasswordValidatorTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

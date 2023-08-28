@@ -156,16 +156,6 @@ final class LogInViewController: UIViewController {
         field.textField.layer.cornerRadius = 6
         field.textField.layer.borderWidth = 2
     }
-    
-    private func encodeAndStoreUserData(_ users: [User]) {
-        let encoder = JSONEncoder()
-        do {
-            let encodedUsers = try encoder.encode(users)
-            UserDefaults.standard.set(encodedUsers, forKey: "userData")
-        } catch {
-            print("Error encoding and storing user data: \(error)")
-        }
-    }
 }
 
 protocol LogInViewControllerDelegate: AnyObject {

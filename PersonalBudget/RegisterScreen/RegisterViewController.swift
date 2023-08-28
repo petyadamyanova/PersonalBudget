@@ -162,10 +162,6 @@ class RegisterViewController: UIViewController {
         UsersManager.shared.addUser(user)
         UsersManager.shared.setCurrentUser(user)
         
-        //encodeAndStoreUserData([user])
-        //UserFileManager.saveUsersData([user])
-        
-        
         let mainViewController = MainViewController()
         let navController = UINavigationController(rootViewController: mainViewController)
         navController.modalPresentationStyle = .fullScreen
@@ -184,15 +180,5 @@ class RegisterViewController: UIViewController {
         field.textField.layer.borderColor = UIColor.black.cgColor
         field.textField.layer.cornerRadius = 6
         field.textField.layer.borderWidth = 2
-    }
-
-    private func encodeAndStoreUserData(_ users: [User]) {
-        let encoder = JSONEncoder()
-        do {
-            let encodedUsers = try encoder.encode(users)
-            UserDefaults.standard.set(encodedUsers, forKey: "userData")
-        } catch {
-            print("Error encoding and storing user data: \(error)")
-        }
     }
 }
