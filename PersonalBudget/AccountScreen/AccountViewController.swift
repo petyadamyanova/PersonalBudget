@@ -7,7 +7,14 @@
 
 import UIKit
 
-class AccountViewController: UIViewController {
+protocol AccountViewControllerDelegate: AnyObject {
+    func didAddAccount(_ account: Account)
+}
+
+class AccountViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
+    weak var delegate: AccountViewControllerDelegate?
+    private let accountTypes = ["Cash", "Card", "Savings", "Other"]
+    
     private var stackView: UIStackView = {
        let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -18,7 +25,7 @@ class AccountViewController: UIViewController {
     
     private var accountNameField: RoundedValidatedTextInput = {
         let txtField = RoundedValidatedTextInput()
-        txtField.label.text = "Account name"
+        txtField.label.text = "Account name*"
         txtField.textField.placeholder = "Enter account name"
     
         return txtField
@@ -32,9 +39,14 @@ class AccountViewController: UIViewController {
         return txtField
     }()
     
+    private var accountTypePicker: UIPickerView = {
+        let picker = UIPickerView()
+        return picker
+    }()
+    
     private var balanceField: RoundedValidatedTextInput = {
         let txtField = RoundedValidatedTextInput()
-        txtField.label.text = "Balance"
+        txtField.label.text = "Balance*"
         txtField.textField.placeholder = "Enter balance"
     
         return txtField
@@ -57,6 +69,11 @@ class AccountViewController: UIViewController {
         setupSubmitButton()
         addSubviews()
         addStackViewConstraints()
+        
+        accountTypePicker.dataSource = self
+        accountTypePicker.delegate = self
+        accountTypeField.textField.inputView = accountTypePicker
+               
     }
     
     private func setupDismissButton() {
@@ -80,16 +97,40 @@ class AccountViewController: UIViewController {
         
         guard let accountName = accountNameField.textField.text,
               let accountType = accountTypeField.textField.text,
-              let _ = balanceField.textField.text,
-              let openingBalance = Int(balanceField.textField.text!) else {
+              let balance = balanceField.textField.text,
+              let openingBalance = Int(balance) else {
+            showErrorForField(field: balanceField, message: "You have to enter number here!")
             return
         }
         
-        let newAccount = Account(accountName: accountName, accountType: accountType, openingBalance: openingBalance)
+        removeErrorForField(field: balanceField)
         
-        currentUser.accounts.append(newAccount)
+        if accountName.isEmpty {
+            showErrorForField(field: accountNameField, message: "You have to enter account name")
+            return
+        } else {
+            removeErrorForField(field: accountNameField)
+        }
+        
+        
+        let newAccount = Account(accountName: accountName, accountType: accountType, openingBalance: openingBalance, expenses: [])
+        
+        if var existingUsers = UserFileManager.loadUsersData() {
+            // Find and update the current user
+            if let userIndex = existingUsers.firstIndex(where: { $0.username == currentUser.username }) {
+                currentUser.accounts = existingUsers[userIndex].accounts
+                currentUser.accounts.append(newAccount)
+                existingUsers[userIndex] = currentUser
+            }
+            // Save the updated user data
+            UserFileManager.saveUsersData(existingUsers)
+        }
+
         UsersManager.shared.updateCurrentUser(currentUser)
         
+        //UserFileManager.saveUsersData([currentUser])
+        
+        delegate?.didAddAccount(newAccount)
         navigationController?.popViewController(animated: true)
     }
     
@@ -110,5 +151,44 @@ class AccountViewController: UIViewController {
         ])
     }
     
+    private func saveUserData(_ users: [User]) {
+        let encoder = JSONEncoder()
+        do {
+            let encodedUsers = try encoder.encode(users)
+            UserDefaults.standard.set(encodedUsers, forKey: "userData")
+        } catch {
+            print("Error encoding and storing user data: \(error)")
+        }
+    }
+    
+    private func showErrorForField(field: RoundedValidatedTextInput, message: String) {
+        field.errorField.isHidden = false
+        field.textField.layer.borderColor = UIColor.red.cgColor
+        field.textField.layer.borderWidth = 0.5
+        field.errorField.text = message
+    }
+    
+    private func removeErrorForField(field: RoundedValidatedTextInput) {
+        field.errorField.isHidden = true
+        field.textField.layer.borderColor = UIColor.black.cgColor
+        field.textField.layer.cornerRadius = 6
+        field.textField.layer.borderWidth = 2
+    }
+    
+    @objc(numberOfComponentsInPickerView:) func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    @objc func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return accountTypes.count
+    }
+    
+    @objc func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return accountTypes[row]
+    }
+    
+    @objc func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        accountTypeField.textField.text = accountTypes[row]
+    }
 
 }

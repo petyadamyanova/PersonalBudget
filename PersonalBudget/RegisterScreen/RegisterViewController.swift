@@ -8,8 +8,12 @@
 import UIKit
 
 class RegisterViewController: UIViewController {
+    private let emailValidator = EmailValidator()
+    private let passwordValidator = PasswordValidator()
+    private let usernameValidator = UsernameValidator()
+    private let nameValidator = NameValidator()
     
-    private var stackView: UIStackView = {
+    internal var stackView: UIStackView = {
        let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
@@ -17,7 +21,7 @@ class RegisterViewController: UIViewController {
         return stackView
     }()
     
-    private var nameField: RoundedValidatedTextInput = {
+    internal var nameField: RoundedValidatedTextInput = {
         let txtField = RoundedValidatedTextInput()
         txtField.label.text = "Name"
         txtField.textField.placeholder = "Enter name"
@@ -25,15 +29,16 @@ class RegisterViewController: UIViewController {
         return txtField
     }()
     
-    private var usernameField: RoundedValidatedTextInput = {
+    internal var usernameField: RoundedValidatedTextInput = {
         let txtField = RoundedValidatedTextInput()
         txtField.label.text = "UserName"
         txtField.textField.placeholder = "Enter username"
+        txtField.errorField.text = "Error"
     
         return txtField
     }()
     
-    private var emailField: RoundedValidatedTextInput = {
+    internal var emailField: RoundedValidatedTextInput = {
         let txtField = RoundedValidatedTextInput()
         txtField.label.text = "Email"
         txtField.textField.placeholder = "Enter email"
@@ -41,7 +46,7 @@ class RegisterViewController: UIViewController {
         return txtField
     }()
     
-    private var passwordField: RoundedValidatedTextInput = {
+    internal var passwordField: RoundedValidatedTextInput = {
         let txtField = RoundedValidatedTextInput()
         txtField.label.text = "Password"
         txtField.textField.placeholder = "Enter password"
@@ -50,7 +55,7 @@ class RegisterViewController: UIViewController {
         return txtField
     }()
     
-    private var secondPasswordField: RoundedValidatedTextInput = {
+    internal var secondPasswordField: RoundedValidatedTextInput = {
         let txtField = RoundedValidatedTextInput()
         txtField.label.text = "Repeat the password"
         txtField.textField.placeholder = "Enter password"
@@ -59,7 +64,7 @@ class RegisterViewController: UIViewController {
         return txtField
     }()
     
-    private var registerButton = {
+    internal var registerButton = {
         let button = UIButton()
         button.setTitle("Register", for: .normal)
         
@@ -69,7 +74,6 @@ class RegisterViewController: UIViewController {
         
         return button
     }()
-    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -78,7 +82,6 @@ class RegisterViewController: UIViewController {
         setupSubmitButton()
         addSubviews()
         addStackViewConstraints()
-        
     }
     
     private func setupSubmitButton() {
@@ -105,27 +108,59 @@ class RegisterViewController: UIViewController {
         ])
     }
     
-    private func didtapRegisterButton(_ action: UIAction) {
+    internal func didtapRegisterButton(_ action: UIAction) {
         guard let name = nameField.textField.text,
               let email = emailField.textField.text,
               let username = usernameField.textField.text,
               let password = passwordField.textField.text,
               let password2 = secondPasswordField.textField.text else {
-                  showErrorAlert(message: "All fields have to be filled!")
                   return
               }
         
-        if password != password2 {
-            showErrorAlert(message: "The passwords don't match!")
-            return
+        if !nameValidator.isValid(name) {
+            showErrorForField(field: nameField, message: "You have to enter your name here")
+        } else {
+            removeErrorForField(field: nameField)
         }
         
-        if username.count < 3 {
-            showErrorAlert(message: "The username has to be at least 3 symbols!")
+        if !emailValidator.isValid(email) {
+            showErrorForField(field: emailField, message: "Invalid email format")
             return
+        } else {
+            removeErrorForField(field: emailField)
+        }
+        
+        if !usernameValidator.isValid(username){
+            showErrorForField(field: usernameField, message: "The username has to be at least 3 symbols!")
+            return
+        } else {
+            removeErrorForField(field: usernameField)
+        }
+        
+        if !passwordValidator.isValid(password) {
+            showErrorForField(field: secondPasswordField, message: "The passwords have to be 8 symbols")
+            return
+        } else {
+            removeErrorForField(field: secondPasswordField)
+        }
+        
+        if password != password2 {
+            showErrorForField(field: secondPasswordField, message: "The passwords don't match!")
+            return
+        } else {
+            removeErrorForField(field: secondPasswordField)
         }
         
         let user = User(name: name, email: email, username: username, password: password, accounts: [])
+        
+        if var existingUsers = UserFileManager.loadUsersData() {
+            existingUsers.append(user)
+            UserFileManager.saveUsersData(existingUsers)
+        } else {
+            UserFileManager.saveUsersData([user])
+        }
+            
+        
         UsersManager.shared.addUser(user)
         UsersManager.shared.setCurrentUser(user)
         
@@ -134,13 +169,18 @@ class RegisterViewController: UIViewController {
         navController.modalPresentationStyle = .fullScreen
         navigationController?.present(navController, animated: true)
     }
-}
-
-extension UIViewController {
-    func showErrorAlert(message: String) {
-        let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-        alert.addAction(okAction)
-        present(alert, animated: true, completion: nil)
+    
+    private func showErrorForField(field: RoundedValidatedTextInput, message: String) {
+        field.errorField.isHidden = false
+        field.textField.layer.borderColor = UIColor.red.cgColor
+        field.textField.layer.borderWidth = 0.5
+        field.errorField.text = message
+    }
+    
+    private func removeErrorForField(field: RoundedValidatedTextInput) {
+        field.errorField.isHidden = true
+        field.textField.layer.borderColor = UIColor.black.cgColor
+        field.textField.layer.cornerRadius = 6
+        field.textField.layer.borderWidth = 2
     }
 }

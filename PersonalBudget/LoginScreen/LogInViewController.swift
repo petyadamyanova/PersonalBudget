@@ -18,7 +18,7 @@ final class LogInViewController: UIViewController {
         return stackView
     }()
     
-    private var usernameField: RoundedValidatedTextInput = {
+    internal var usernameField: RoundedValidatedTextInput = {
         let txtField = RoundedValidatedTextInput()
         txtField.label.text = "UserName"
         txtField.textField.placeholder = "Enter username"
@@ -26,7 +26,7 @@ final class LogInViewController: UIViewController {
         return txtField
     }()
     
-    private var passwordField: RoundedValidatedTextInput = {
+    internal var passwordField: RoundedValidatedTextInput = {
         let txtField = RoundedValidatedTextInput()
         txtField.label.text = "Password"
         txtField.textField.placeholder = "Enter password"
@@ -35,7 +35,7 @@ final class LogInViewController: UIViewController {
         return txtField
     }()
     
-    private var submitButton = {
+    internal var submitButton = {
         let button = UIButton()
         button.setTitle("Submit", for: .normal)
         
@@ -94,31 +94,35 @@ final class LogInViewController: UIViewController {
         dismiss(animated: true)
     }
     
-    private func didtapSubmitButton(_ action: UIAction) {
+    internal func didtapSubmitButton(_ action: UIAction) {
         
-        guard let username = usernameField.textField.text else {
+        guard let username = usernameField.textField.text,
+              let password = passwordField.textField.text else {
+            return
+        }
+            
+        guard let users = UserFileManager.loadUsersData() else {
             return
         }
         
-        /*if username.isEmpty && ((passwordField.textField.text?.isEmpty) == nil){
-            usernameField.layer.borderColor = UIColor.red.cgColor
-            passwordField.layer.borderColor = UIColor.red.cgColor
-            errorLabel.text = "Please fill all the field!s"
-        }else if username.isEmpty && ((passwordField.textField.text?.isEmpty) != nil){
-            usernameField.layer.borderColor = UIColor.red.cgColor
-            errorLabel.text = "Please fill username field!"
-        }else if !username.isEmpty && ((passwordField.textField.text?.isEmpty) == nil){
-            passwordField.layer.borderColor = UIColor.red.cgColor
-            errorLabel.text = "Please fill password field!"
-        }*/
+        if users.first(where: { $0.username != username }) == nil {
+            showErrorForField(field: usernameField, message: "Username not found!")
+        }else{
+            removeErrorForField(field: usernameField)
+        }
         
-        if UsersManager.shared.userExists(username: username) {
+        if let user = users.first(where: { $0.username == username && $0.password == password }) {
+            
+            UsersManager.shared.addUser(user)
+            UsersManager.shared.setCurrentUser(user)
             
             let mainViewController = MainViewController()
             let navController = UINavigationController(rootViewController: mainViewController)
             navController.modalPresentationStyle = .fullScreen
             navigationController?.present(navController, animated: true)
             delegate?.didLogin(username)
+        } else if users.first(where: { $0.password != password }) != nil {
+            showErrorForField(field: passwordField, message: "Password is incorect!")
         }
     }
     
@@ -138,7 +142,20 @@ final class LogInViewController: UIViewController {
             stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16)
         ])
     }
-
+    
+    private func showErrorForField(field: RoundedValidatedTextInput, message: String) {
+        field.errorField.isHidden = false
+        field.textField.layer.borderColor = UIColor.red.cgColor
+        field.textField.layer.borderWidth = 0.5
+        field.errorField.text = message
+    }
+    
+    private func removeErrorForField(field: RoundedValidatedTextInput) {
+        field.errorField.isHidden = true
+        field.textField.layer.borderColor = UIColor.black.cgColor
+        field.textField.layer.cornerRadius = 6
+        field.textField.layer.borderWidth = 2
+    }
 }
 
 protocol LogInViewControllerDelegate: AnyObject {

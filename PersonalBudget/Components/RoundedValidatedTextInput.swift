@@ -14,7 +14,7 @@ class RoundedValidatedTextInput: UIStackView {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
-        stackView.spacing = 12
+        stackView.spacing = 2
         return stackView
     }()
     
@@ -25,11 +25,21 @@ class RoundedValidatedTextInput: UIStackView {
         return label
     }()
     
+    public var errorField: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 12)
+        label.setContentHuggingPriority(.defaultHigh, for: .vertical)
+        label.text = "Error"
+        
+        return label
+    }()
+    
     public var textField: UITextField = {
         let textField = UITextField()
         textField.layer.cornerRadius = 6
         textField.layer.borderWidth = 2
         textField.setContentHuggingPriority(.defaultLow, for: .vertical)
+        textField.addConstraint(textField.heightAnchor.constraint(equalToConstant: 35))
         return textField
     }()
     
@@ -46,6 +56,8 @@ class RoundedValidatedTextInput: UIStackView {
     private func setupSubviews() {
         stackView.addArrangedSubview(label)
         stackView.addArrangedSubview(textField)
+        stackView.addArrangedSubview(errorField)
+        errorField.isHidden = true
         
         addArrangedSubview(stackView)
     }

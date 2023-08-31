@@ -47,6 +47,6 @@ class AuthenticationViewController: UIViewController {
 
 extension AuthenticationViewController: LogInViewControllerDelegate {
     func didLogin(_ user: String) {
-        welcomeLabel.text = "Wellcome, \(user)!"
+        welcomeLabel.text = "Wellcome!"
    }
 }
