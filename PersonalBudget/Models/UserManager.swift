@@ -9,9 +9,13 @@ import Foundation
 
 final class UsersManager {
     static var shared = UsersManager()
-    private var currentUser: User?
-    private var currentAccount: Account?
+    private(set) var currentUser: User?
+    private(set) var currentAccount: Account?
     var users: [User] = []
+    
+    func setExpenses(expenses: [Expense]){
+        currentAccount?.expenses = expenses
+    }
     
     private init() {
         loadCurrentUser()

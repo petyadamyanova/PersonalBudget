@@ -36,6 +36,7 @@
 		DB7B18DA2A9CBD6B00AC5EBC /* LogInViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7B18D92A9CBD6B00AC5EBC /* LogInViewControllerTests.swift */; };
 		DB7B18DC2A9CC13A00AC5EBC /* RegisterViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7B18DB2A9CC13A00AC5EBC /* RegisterViewControllerTests.swift */; };
 		DB7B18DE2A9CCAD900AC5EBC /* ExpenseViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7B18DD2A9CCAD900AC5EBC /* ExpenseViewControllerTests.swift */; };
+		DB7B18E72AA0986C00AC5EBC /* CurrencyDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7B18E62AA0986C00AC5EBC /* CurrencyDTO.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,6 +83,7 @@
 		DB7B18D92A9CBD6B00AC5EBC /* LogInViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewControllerTests.swift; sourceTree = "<group>"; };
 		DB7B18DB2A9CC13A00AC5EBC /* RegisterViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewControllerTests.swift; sourceTree = "<group>"; };
 		DB7B18DD2A9CCAD900AC5EBC /* ExpenseViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseViewControllerTests.swift; sourceTree = "<group>"; };
+		DB7B18E62AA0986C00AC5EBC /* CurrencyDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyDTO.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +125,7 @@
 		3F187F982A8A08490064590B /* PersonalBudget */ = {
 			isa = PBXGroup;
 			children = (
+				DB7B18E52AA0985500AC5EBC /* DTO */,
 				DB7B18C12A9C9C6300AC5EBC /* Validators */,
 				DB7B18AC2A94CCF100AC5EBC /* AccountExpenseScreen */,
 				3F3AD8712A8A8B9600536426 /* RegisterScreen */,
@@ -235,6 +238,14 @@
 				DB7B18D52A9CBA6B00AC5EBC /* NameValidator.swift */,
 			);
 			path = Validators;
+			sourceTree = "<group>";
+		};
+		DB7B18E52AA0985500AC5EBC /* DTO */ = {
+			isa = PBXGroup;
+			children = (
+				DB7B18E62AA0986C00AC5EBC /* CurrencyDTO.swift */,
+			);
+			path = DTO;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -354,6 +365,7 @@
 				DB7B18A92A94C5C800AC5EBC /* CustomCell.swift in Sources */,
 				DB7B18D42A9CAC6300AC5EBC /* RegisterCoordinator.swift in Sources */,
 				3F3AD86F2A8A8AB300536426 /* RoundedValidatedTextInput.swift in Sources */,
+				DB7B18E72AA0986C00AC5EBC /* CurrencyDTO.swift in Sources */,
 				DB7B18B02A94D12700AC5EBC /* ExpenseViewController.swift in Sources */,
 				3F187F9C2A8A08490064590B /* SceneDelegate.swift in Sources */,
 				3F3AD8612A8A817400536426 /* User.swift in Sources */,

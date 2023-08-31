@@ -64,7 +64,8 @@ class AccountExpenseViewController: UIViewController {
     
     private func setupAddExpenseButton() {
         let accountAction = UIAction(title: "Add expense", handler: didTapAddExpenseButton)
-        navigationItem.rightBarButtonItem = UIBarButtonItem(primaryAction: accountAction)
+        let currencyAction = UIAction(title: "Currency", handler: didTapCurrencyButton)
+        navigationItem.rightBarButtonItems = [UIBarButtonItem(primaryAction: accountAction), UIBarButtonItem(primaryAction: currencyAction)]
     }
     
     private func didTapAddExpenseButton(_ action: UIAction) {
@@ -72,6 +73,69 @@ class AccountExpenseViewController: UIViewController {
         expenseViewController.delegate = self
         navigationController?.pushViewController(expenseViewController, animated: true)
     }
+    
+    private func didTapCurrencyButton(_ action: UIAction) {
+        // here we
+    }
+    
+    /*func updateAccountCurrency(with currency: String) {
+        let endpoint = "http://data.fixer.io/api/latest?access_key=cd0e1600b61c01035ad8b987c70c46c5&symbols=USD,CAD,JPY,BGN,RUB,GBP"
+
+
+        Task {
+            do {
+                let (data, response) = try await URLSession.shared.data(from: URL(string: endpoint)!)
+
+                guard let httpResponse = response as? HTTPURLResponse,
+                      (200..<300).contains(httpResponse.statusCode) else {
+                    //to do: Ui show error
+                    return
+                }
+
+
+                guard let currencyDTO = try? JSONDecoder().decode(CurrencyDTO.self, from: data) else {
+                    // to do: ui show something
+                    return
+                }
+                
+                guard let currentUserAccount = UsersManager.shared.currentUser else {
+                    return
+                }
+
+                guard let accountIndex = currentUserAccount.accounts.firstIndex(where: { $0.accountName == currentAccount.accountName }) else {
+                    return
+                }
+                
+                guard let rate = currencyDTO.rates[currency] else {
+                    return
+                }
+                
+                guard let currentAccount = UsersManager.shared.currentAccount else{
+                    return
+                }
+                
+                let toEURRate = currencyDTO.rates[currentUserAccount.currency.rawValue] ?? 1.0
+                
+                let newTransactions: [Expense] = currentAccount.expenses.map { expense in
+                    Expense(date: expense.date, name: expense.name, amount: expense.amount / toEURRate * rate, category: expense.category)
+                }
+                
+                UsersManager.shared.currentAccount?.expenses = 
+                    //.expenses = newTransactions
+                
+                UsersManager.currentUser?.accounts[accountIndex].openingBalance /= toEURRate
+                UsersManager.currentUser?.accounts[accountIndex].openingBalance *= rate
+                
+                guard let currency = Currency(rawValue: currency) else {
+                    return
+                }
+                
+                UsersManager.currentUser?.accounts[accountIndex].currency = currency
+            } catch {
+                print("Error: \(error)")
+            }
+        }
+    }*/
 }
 
 extension AccountExpenseViewController: UITableViewDataSource {

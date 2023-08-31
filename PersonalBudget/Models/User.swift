@@ -13,6 +13,7 @@ struct User: Codable {
     var username: String
     var password: String
     var accounts: [Account]
+    //var currency: Currency
 }
 
 struct Account: Codable {
@@ -28,3 +29,15 @@ struct Expense: Codable {
     var amount: Double
     var category: String
 }
+
+enum Currency: String, CaseIterable, Codable {
+    case EUR
+    case USD
+    case CAD
+    case JPY
+    case BGN
+    case RUB
+    case GBP
+}
+
+
